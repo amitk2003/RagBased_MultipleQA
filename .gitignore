@@ -1,2 +1,15 @@
 env/
-./pycache
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# Data / model artefacts
+data/chroma_db/
+data/raw/
+data/bm25_index.pkl
+
+# Docker volumes
+neo4j_data/
+postgres_data/
