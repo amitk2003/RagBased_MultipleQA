@@ -21,7 +21,7 @@
 | 🔍 **Hybrid Retrieval** | Combines ChromaDB vector search with BM25 keyword reranking |
 | 🕸️ **Graph RAG** | Uses Neo4j to extract and visualize entities and relationships |
 | 🧠 **Conversational Memory** | Powered by PostgreSQL to maintain chat history context |
-| 🤖 **Gemini LLM Integration** | Uses Google Gemini for high-quality, grounded answer generation |
+| 🤖 **Groq LLM Integration** | Uses Groq for high-quality, grounded answer generation |
 | 📊 **Built-in Evaluation** | Uses `ragas` to evaluate hallucination and generation quality |
 | 🖥️ **Streamlit UI** | Clean, interactive browser-based chat interface |
 
@@ -34,7 +34,7 @@
 * **Vector Store:** ChromaDB
 * **Graph Database:** Neo4j (Entity Extraction & Graph RAG)
 * **Memory Database:** PostgreSQL
-* **LLM / Embedding:** Google Gemini (`langchain-google-genai`), Sentence Transformers (`all-MiniLM-L6-v2`)
+* **LLM / Embedding:** Groq (`langchain-groq`), Sentence Transformers (`all-MiniLM-L6-v2`)
 
 ---
 
@@ -52,8 +52,8 @@ cd RagBased_MultipleQA
 Create a `.env` file in the root directory and add your API keys.
 
 ```env
-# ── Google Gemini (Required) ─────────────────────────────────────────────────
-GOOGLE_API_KEY=your_google_api_key_here
+# ── Groq (Required) ──────────────────────────────────────────────────────────
+GROQ_API_KEY=your_groq_api_key_here
 
 # ── Neo4j (matches docker-compose.yml defaults) ──────────────────────────────
 NEO4J_URI=bolt://neo4j:7687
@@ -85,7 +85,7 @@ docker-compose up --build
 1. Open the UI at `http://localhost:8501`.
 2. **Upload PDF(s)** from the sidebar. Wait for the extraction and indexing to complete (Graph RAG entities will be extracted in the background).
 3. Type your question in the main chat panel.
-4. The system will retrieve context via **Hybrid Search (ChromaDB + BM25)**, augment it with Graph data if applicable, and generate an answer using **Google Gemini**.
+4. The system will retrieve context via **Hybrid Search (ChromaDB + BM25)**, augment it with Graph data if applicable, and generate an answer using **Groq**.
 5. You can view the retrieved sources and confidence scores alongside your answers!
 
 ---
@@ -96,7 +96,7 @@ docker-compose up --build
 2. **Chunking & Indexing:** Text is split and stored in ChromaDB (dense vectors) and BM25 (sparse keyword index).
 3. **Graph Extraction (Background):** Chunks are processed to extract entities/relationships and loaded into Neo4j.
 4. **Retrieval:** A user query triggers hybrid retrieval. The best chunks are reranked and provided as context.
-5. **Generation:** LangChain queries Google Gemini with the retrieved context and conversation history to produce a grounded response.
+5. **Generation:** LangChain queries Groq with the retrieved context and conversation history to produce a grounded response.
 
 ---
 
@@ -116,5 +116,5 @@ This project is licensed under the **MIT License** — feel free to use, modify,
 ---
 
 <div align="center">
-  <sub>Built with ❤️ using Python, FastAPI, Streamlit, Neo4j, Docker and Google Gemini</sub>
+  <sub>Built with ❤️ using Python, FastAPI, Streamlit, Neo4j, Docker and Groq</sub>
 </div>

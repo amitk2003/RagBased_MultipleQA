@@ -1,4 +1,7 @@
 # src/main.py  — CLI entry-point for the RAG QA pipeline
+from dotenv import load_dotenv
+
+load_dotenv()
 import os
 import sys
 

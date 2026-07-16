@@ -27,7 +27,7 @@ class AnswerEval(BaseModel):
 
 def evaluate_answer(query: str, answer: str, context: str) -> AnswerEval:
     """Self-reflection step to compute confidence and detect hallucination."""
-    llm = get_llm(provider="gemini", model_name="gemini-1.5-pro", temperature=0)
+    llm = get_llm(provider="groq", model_name="llama-3.1-8b-instant", temperature=0)
     structured_llm = llm.with_structured_output(AnswerEval)
     
     prompt = f"""

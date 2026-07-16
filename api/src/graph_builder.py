@@ -19,8 +19,8 @@ class GraphData(BaseModel):
     relationships: List[Relationship]
 
 def extract_graph_data(text: str) -> GraphData:
-    """Uses Gemini LLM to extract nodes and relationships from text."""
-    llm = get_llm(provider="gemini", model_name="gemini-1.5-pro", temperature=0)
+    """Uses Groq LLM to extract nodes and relationships from text."""
+    llm = get_llm(provider="groq", model_name="llama-3.1-8b-instant", temperature=0)
     structured_llm = llm.with_structured_output(GraphData)
     
     prompt = ChatPromptTemplate.from_messages([

@@ -5,13 +5,19 @@ from typing import List, Optional
 import uvicorn
 import os
 
+from dotenv import load_dotenv
+load_dotenv()
+
+
+print("=" * 50)
+print("GROQ_API_KEY =", os.getenv("GROQ_API_KEY"))
+print("=" * 50)
 from src.extract import extract_and_chunk_pdf
 from src.graph_builder import process_chunk_for_graph
 from src.index import build_indices
 from src.retrieval import hybrid_retrieve_and_rerank
 from src.generate import generate_answer
 from src.evaluation import record_for_evaluation, run_evaluation
-from dependencies import get_neo4j_driver, get_chroma_client
 
 app = FastAPI(title="Advanced RAG System API")
 

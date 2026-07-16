@@ -162,7 +162,7 @@ with tab_chat:
 # ─────────────────────────────────────────────────────────────────────────────
 with tab_graph:
     st.markdown("### 🕸️ Knowledge Graph Explorer")
-    st.caption("Entities and relationships extracted from uploaded documents via Gemini LLM → Neo4j.")
+    st.caption("Entities and relationships extracted from uploaded documents via Groq LLM → Neo4j.")
 
     col_refresh, col_info = st.columns([1, 3])
     with col_refresh:
@@ -253,12 +253,12 @@ with tab_graph:
 # ─────────────────────────────────────────────────────────────────────────────
 with tab_eval:
     st.markdown("### 📊 Ragas Evaluation Dashboard")
-    st.caption("Evaluates Faithfulness, Answer Relevancy, Context Precision, and Context Recall using Gemini LLM.")
+    st.caption("Evaluates Faithfulness, Answer Relevancy, Context Precision, and Context Recall using Groq LLM.")
 
     st.info("Ask several questions in the Chat tab first, then run evaluation to see metrics.", icon="ℹ️")
 
     if st.button("▶️ Run Ragas Evaluation", use_container_width=True, type="primary"):
-        with st.spinner("Running Ragas evaluation with Gemini LLM…"):
+        with st.spinner("Running Ragas evaluation with Groq LLM…"):
             try:
                 res = requests.get(f"{API_URL}/evaluate", timeout=300)
                 if res.status_code == 200:

@@ -35,7 +35,7 @@ def create_pdf(filename="Project_Details.pdf"):
     # 1. Title and Skills (Max 5)
     pdf.chapter_title('Project Title & Core Skills')
     pdf.bold_text('Title: ', 'Enterprise Knowledge Graph & Hybrid RAG Platform\n')
-    pdf.bold_text('Skills: ', 'Python | FastAPI | Neo4j | ChromaDB | Google Gemini\n')
+    pdf.bold_text('Skills: ', 'Python | FastAPI | Neo4j | ChromaDB | Groq LLM\n')
 
     # 2. Technologies Used & Requirements
     pdf.chapter_title('Technologies & Architecture Details')
@@ -49,7 +49,7 @@ def create_pdf(filename="Project_Details.pdf"):
     pdf.bold_text('- FastAPI: ', 'High-performance asynchronous web framework used to build the REST API backend.\n')
     pdf.bold_text('- Neo4j: ', 'Graph database used for Graph RAG, extracting and storing entities and their relationships.\n')
     pdf.bold_text('- ChromaDB: ', 'Vector database utilized for storing dense embeddings and performing semantic similarity search.\n')
-    pdf.bold_text('- Google Gemini: ', 'The Large Language Model (LLM) integrated via LangChain to generate contextually grounded answers.\n\n')
+    pdf.bold_text('- Groq LLM: ', 'The Large Language Model (LLM) integrated via LangChain to generate contextually grounded answers.\n\n')
 
     # 3. STAR Format Explanation
     pdf.chapter_title('Project Explanation (STAR Format)')
@@ -73,8 +73,8 @@ def create_pdf(filename="Project_Details.pdf"):
     )
     
     pdf.bold_text('Result: ', 
-        'The resulting platform successfully ingests multiple PDFs, extracts rich contextual data, and utilizes Google '
-        'Gemini to provide precise, hallucination-reduced answers. The system improved context retention by 40% and '
+        'The resulting platform successfully ingests multiple PDFs, extracts rich contextual data, and utilizes Groq '
+        'to provide precise, hallucination-reduced answers. The system improved context retention by 40% and '
         'reduced hallucinations by 25%, as evaluated by the automated Ragas framework.\n'
     )
 

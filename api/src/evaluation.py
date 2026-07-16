@@ -10,15 +10,16 @@ from ragas.metrics import (
 )
 from ragas.llms import LangchainLLMWrapper
 from ragas.embeddings import LangchainEmbeddingsWrapper
-from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
+from langchain_groq import ChatGroq
+from langchain_community.embeddings import HuggingFaceEmbeddings
 from typing import List, Dict
 
-# Configure Ragas to use Gemini LLM + Google embeddings (avoids needing OpenAI keys)
+# Configure Ragas to use Groq LLM + local HuggingFace embeddings (avoids needing OpenAI or Google keys)
 _ragas_llm = LangchainLLMWrapper(
-    ChatGoogleGenerativeAI(model="gemini-1.5-pro", temperature=0)
+    ChatGroq(model="llama-3.1-8b-instant", temperature=0)
 )
 _ragas_embeddings = LangchainEmbeddingsWrapper(
-    GoogleGenerativeAIEmbeddings(model="models/embedding-001")
+    HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 )
 
 # In-memory store for the current server session
@@ -35,7 +36,7 @@ def record_for_evaluation(question: str, answer: str, contexts: List[str], groun
     })
 
 def run_evaluation() -> Dict:
-    """Runs Ragas evaluation on stored history using Gemini LLM."""
+    """Runs Ragas evaluation on stored history using Groq LLM."""
     if not _evaluations:
         return {"status": "No data to evaluate. Ask some questions first."}
 
