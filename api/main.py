@@ -9,9 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-print("=" * 50)
-print("GROQ_API_KEY =", os.getenv("GROQ_API_KEY"))
-print("=" * 50)
+
 from src.extract import extract_and_chunk_pdf
 from src.graph_builder import process_chunk_for_graph
 from src.index import build_indices

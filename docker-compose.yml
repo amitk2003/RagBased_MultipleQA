@@ -65,16 +65,13 @@ services:
     networks:
       - rag_network
 
-  # ── Streamlit UI ─────────────────────────────────────────────────────────────
+  # ── React Frontend ───────────────────────────────────────────────────────────
   ui:
     build:
       context: ./ui
+      dockerfile: Dockerfile
     ports:
-      - "8501:8501"
-    environment:
-      - API_URL=http://api:8000
-    volumes:
-      - ./ui:/app
+      - "3000:80"
     depends_on:
       - api
     networks:

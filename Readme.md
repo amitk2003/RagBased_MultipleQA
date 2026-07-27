@@ -5,7 +5,8 @@
 
 ![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
-![Streamlit](https://img.shields.io/badge/Streamlit-1.x-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+![React](https://img.shields.io/badge/React-19.x-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-v4.0-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 ![Neo4j](https://img.shields.io/badge/Neo4j-008CC1?style=for-the-badge&logo=neo4j&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/postgresql-4169e1?style=for-the-badge&logo=postgresql&logoColor=white)
@@ -23,13 +24,13 @@
 | 🧠 **Conversational Memory** | Powered by PostgreSQL to maintain chat history context |
 | 🤖 **Groq LLM Integration** | Uses Groq for high-quality, grounded answer generation |
 | 📊 **Built-in Evaluation** | Uses `ragas` to evaluate hallucination and generation quality |
-| 🖥️ **Streamlit UI** | Clean, interactive browser-based chat interface |
+| 🖥️ **React Frontend** | Clean, modern dashboard built with React + Tailwind CSS |
 
 ---
 
 ## 🏗️ Architecture Stack
 
-* **Frontend:** Streamlit (`ui/`)
+* **Frontend:** React + Tailwind CSS (`ui/`)
 * **Backend:** FastAPI (`api/`)
 * **Vector Store:** ChromaDB
 * **Graph Database:** Neo4j (Entity Extraction & Graph RAG)
@@ -74,7 +75,7 @@ docker-compose up --build
 
 ### 4. Access the Services
 
-* **Streamlit UI:** [http://localhost:8501](http://localhost:8501)
+* **React UI:** [http://localhost:3000](http://localhost:3000)
 * **FastAPI Backend (Swagger UI):** [http://localhost:8000/docs](http://localhost:8000/docs)
 * **Neo4j Browser:** [http://localhost:7474](http://localhost:7474) *(Login: neo4j / password)*
 
@@ -82,7 +83,7 @@ docker-compose up --build
 
 ## 🖥️ Using the Application
 
-1. Open the UI at `http://localhost:8501`.
+1. Open the UI at `http://localhost:3000`.
 2. **Upload PDF(s)** from the sidebar. Wait for the extraction and indexing to complete (Graph RAG entities will be extracted in the background).
 3. Type your question in the main chat panel.
 4. The system will retrieve context via **Hybrid Search (ChromaDB + BM25)**, augment it with Graph data if applicable, and generate an answer using **Groq**.
@@ -109,6 +110,16 @@ docker-compose up --build
 
 ---
 
+## 🎓 Interview & Presentation Resources
+
+An offline study guide is generated in the project root to help explain this project during technical presentations and interviews:
+* **Interview Prep Guide:** [Interview_Preparation_Guide.pdf](file:///c:/Users/amitk/OneDrive/Desktop/FullStack%20Projects/RAG_BASED_MultipleQA/RagBased_MultipleQA/Interview_Preparation_Guide.pdf)
+  - Contains elevator pitch summaries.
+  - Details 4 engineering challenges solved (non-blocking task queues, network abstraction, multi-stage ingestion, context filtering).
+  - Outlines the top 10 interview Q&As regarding Vector & Graph RAG architectures.
+
+---
+
 ## 📄 License
 
 This project is licensed under the **MIT License** — feel free to use, modify, and distribute.
@@ -116,5 +127,5 @@ This project is licensed under the **MIT License** — feel free to use, modify,
 ---
 
 <div align="center">
-  <sub>Built with ❤️ using Python, FastAPI, Streamlit, Neo4j, Docker and Groq</sub>
+  <sub>Built with ❤️ using Python, FastAPI, React, Tailwind CSS v4, Neo4j, Docker and Groq</sub>
 </div>
