@@ -17,7 +17,7 @@ import {
   Info
 } from 'lucide-react';
 
-const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:8000' : '';
+const API_BASE = import.meta.env.VITE_API_URL || (window.location.hostname === 'localhost' ? 'http://localhost:8000' : '');
 
 function App() {
   const [activeTab, setActiveTab] = useState('chat'); // 'chat' | 'graph' | 'evaluate'
