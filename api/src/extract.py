@@ -18,9 +18,12 @@ def extract_and_chunk_pdf(file_path: str) -> List[Dict[str, str]]:
                 
                 # If no text is found, fallback to OCR
                 if not text.strip():
-                    img_obj = page.to_image(resolution=300)
-                    img = img_obj.original
-                    text = pytesseract.image_to_string(img)
+                    try:
+                        img_obj = page.to_image(resolution=300)
+                        img = img_obj.original
+                        text = pytesseract.image_to_string(img)
+                    except Exception as ocr_err:
+                        print(f"[extract] OCR skipped or tesseract binary unavailable: {ocr_err}")
                 
                 # Simple chunking by page for this lightweight approach.
                 # Further splitting could be applied if pages are too long.

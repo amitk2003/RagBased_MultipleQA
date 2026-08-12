@@ -10,16 +10,25 @@ import os
 POSTGRES_CONNECTION = os.getenv("POSTGRES_CONNECTION_STRING", "postgresql://user:password@postgres:5432/memorydb")
 
 def get_memory_for_session(session_id: str) -> ConversationBufferMemory:
-    message_history = PostgresChatMessageHistory(
-        connection_string=POSTGRES_CONNECTION,
-        session_id=session_id,
-        table_name="chat_history"
-    )
-    return ConversationBufferMemory(
-        memory_key="chat_history",
-        chat_memory=message_history,
-        return_messages=True
-    )
+    try:
+        message_history = PostgresChatMessageHistory(
+            connection_string=POSTGRES_CONNECTION,
+            session_id=session_id,
+            table_name="chat_history"
+        )
+        return ConversationBufferMemory(
+            memory_key="chat_history",
+            chat_memory=message_history,
+            return_messages=True
+        )
+    except Exception as e:
+        print(f"[generate] Postgres memory connection warning: {e}. Using in-memory history fallback.")
+        from langchain.memory import ChatMessageHistory
+        return ConversationBufferMemory(
+            memory_key="chat_history",
+            chat_memory=ChatMessageHistory(),
+            return_messages=True
+        )
 
 class AnswerEval(BaseModel):
     confidence_score: float = Field(description="Score between 0.0 and 1.0 indicating confidence in the answer based ONLY on the context.")

@@ -1,0 +1,50 @@
+services:
+  # ── FastAPI Backend Service ───────────────────────────────────────────────────
+  - type: web
+    name: rag-backend
+    env: python
+    region: singapore # Change to your preferred region (e.g. oregon, frankfurt, singapore)
+    plan: free
+    rootDir: api
+    buildCommand: "pip install --no-cache-dir -r requirements.txt"
+    startCommand: "uvicorn main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.12
+      - key: GROQ_API_KEY
+        sync: false # Prompts for this value in Render Dashboard
+      - key: NEO4J_URI
+        sync: false # e.g. neo4j+s://xxxx.databases.neo4j.io
+      - key: NEO4J_USER
+        value: neo4j
+      - key: NEO4J_PASSWORD
+        sync: false
+      - key: POSTGRES_CONNECTION_STRING
+        fromDatabase:
+          name: rag-postgres
+          property: connectionString
+
+  # ── React Frontend Static Site ───────────────────────────────────────────────
+  - type: web
+    name: rag-frontend
+    env: static
+    rootDir: ui
+    buildCommand: "npm install && npm run build"
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: rag-backend
+          property: host
+
+databases:
+  # ── Render Managed PostgreSQL Database ──────────────────────────────────────
+  - name: rag-postgres
+    plan: free
+    databaseName: memorydb
+    user: raguser
