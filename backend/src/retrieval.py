@@ -53,7 +53,7 @@ def get_bm25_results(query: str, k: int = 10) -> List[Dict]:
     
     formatted_results = []
     for idx in top_n:
-        formatted_results.append({
+        formatted_results.append({   
             'id': ids[idx],
             'text': chunks[idx]['text'],
             'metadata': chunks[idx]['metadata']

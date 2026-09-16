@@ -3,6 +3,7 @@ from src.llm_factory import get_llm
 from langchain_core.prompts import ChatPromptTemplate
 from pydantic import BaseModel, Field
 from dependencies import get_neo4j_driver
+from src.config import LLM_MODEL,LLM_PROVIDER
 
 # Define extraction schema
 class Node(BaseModel):
@@ -20,7 +21,7 @@ class GraphData(BaseModel):
 
 def extract_graph_data(text: str) -> GraphData:
     """Uses Groq LLM to extract nodes and relationships from text."""
-    llm = get_llm(provider="groq", model_name="llama-3.1-8b-instant", temperature=0)
+    llm = get_llm(provider=LLM_PROVIDER, model_name=LLM_MODEL, temperature=0)
     structured_llm = llm.with_structured_output(GraphData)
     
     prompt = ChatPromptTemplate.from_messages([

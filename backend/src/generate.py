@@ -5,9 +5,10 @@ from langchain_community.chat_message_histories import PostgresChatMessageHistor
 from langchain_core.prompts import PromptTemplate
 from pydantic import BaseModel, Field
 from typing import List, Dict, Tuple
+from src.config import LLM_PROVIDER,LLM_MODEL
 import os
 
-POSTGRES_CONNECTION = os.getenv("POSTGRES_CONNECTION_STRING", "postgresql://user:password@postgres:5432/memorydb")
+POSTGRES_CONNECTION = os.getenv("POSTGRES_CONNECTION_STRING")
 
 def get_memory_for_session(session_id: str) -> ConversationBufferMemory:
     try:
@@ -36,8 +37,8 @@ class AnswerEval(BaseModel):
 
 def evaluate_answer(query: str, answer: str, context: str) -> AnswerEval:
     """Self-reflection step to compute confidence and detect hallucination."""
-    llm = get_llm(provider="groq", model_name="llama-3.1-8b-instant", temperature=0)
-    structured_llm = llm.with_structured_output(AnswerEval)
+    llm = get_llm(provider=LLM_PROVIDER, model_name=LLM_MODEL, temperature=0)
+    structured_llm = llm.with_structured_output(AnswerEval,method="function_calling")
     
     prompt = f"""
     Given the following user query, retrieved context, and generated answer:
@@ -50,7 +51,10 @@ def evaluate_answer(query: str, answer: str, context: str) -> AnswerEval:
     """
     
     try:
-        return structured_llm.invoke(prompt)
+        result= structured_llm.invoke(prompt)
+        if isinstance(result,dict):
+            return AnswerEval(**result)
+        return result
     except Exception as e:
         print(f"Error during self-reflection: {e}")
         return AnswerEval(confidence_score=0.5, is_hallucination=False)

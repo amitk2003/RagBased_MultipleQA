@@ -2,6 +2,7 @@ import os
 import pandas as pd
 from datasets import Dataset
 from ragas import evaluate
+from src.config import LLM_MODEL
 from ragas.metrics import (
     faithfulness,
     answer_relevancy,
@@ -16,7 +17,7 @@ from typing import List, Dict
 
 # Configure Ragas to use Groq LLM + local HuggingFace embeddings (avoids needing OpenAI or Google keys)
 _ragas_llm = LangchainLLMWrapper(
-    ChatGroq(model="llama-3.1-8b-instant", temperature=0)
+    ChatGroq(model=LLM_MODEL, temperature=0)
 )
 _ragas_embeddings = LangchainEmbeddingsWrapper(
     HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")

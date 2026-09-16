@@ -37,6 +37,8 @@ class ChatResponse(BaseModel):
     confidence_score: float
     hallucination_flag: bool
 
+
+
 @app.get("/")
 def read_root():
     return {"message": "Welcome to the Advanced RAG API"}

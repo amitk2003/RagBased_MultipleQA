@@ -1,7 +1,8 @@
 import os
 from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_groq import ChatGroq
-def get_llm(provider: str = "groq", model_name: str = "llama-3.1-8b-instant", temperature: float = 0) -> BaseChatModel:
+from src.config import LLM_PROVIDER,LLM_MODEL
+def get_llm(provider= LLM_PROVIDER, model_name = LLM_MODEL, temperature: float = 0) -> BaseChatModel:
     """Factory to get the appropriate LLM."""
   
     if provider == "groq":
